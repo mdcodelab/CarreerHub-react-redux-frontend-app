@@ -16,3 +16,7 @@ npm install normalize.css
 - import 'normalize.css' in index.js
 - SET BEFORE 'index.css'
 - replace contents of index.css
+
+
+#### 4) Landing Page - Setup
+- npm install styled-components
