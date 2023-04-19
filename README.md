@@ -24,4 +24,6 @@ npm install normalize.css
 
 #### 5) Logo Component
 
-#### 6) react Router
+#### 6) React Router
+
+#### 7) Error Page
