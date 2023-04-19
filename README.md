@@ -20,3 +20,5 @@ npm install normalize.css
 
 #### 4) Landing Page - Setup
 - npm install styled-components
+
+#### 5) Logo Component

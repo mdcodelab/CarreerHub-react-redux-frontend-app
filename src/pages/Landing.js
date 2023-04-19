@@ -2,6 +2,7 @@ import React from 'react';
 import logo from ".././assets/images/logo.png";
 import main from ".././assets/images/main.jpg";
 import styled from "styled-components";
+import Logo from "../components/Logo";
 
 
 function Landing() {
@@ -9,7 +10,7 @@ function Landing() {
     <Wrapper>
       <nav>
             <article>
-            <img src={logo} alt="CareerHub " className="logo"></img>
+            <Logo></Logo>
             <span className="logo">CareerHub</span>
             </article>
       </nav>
