@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from ".././assets/images/logo.png";
 import main from ".././assets/images/main.jpg";
 import styled from "styled-components";
 import Logo from "../components/Logo";
+import {Link} from "react-router-dom"
 
 
 function Landing() {
@@ -21,7 +21,7 @@ function Landing() {
         <p>Welcome to CareerHub, the go-to platform for job seekers and employers! Browse through our job 
         postings, create your profile and apply for your 
         dream job today. Employers, post your job openings and find your next star employee.</p>
-        <button className="btn btn-hero">Login/Register</button>
+        <button className="btn btn-hero"><Link to="/register">Login/Register</Link></button>
         </div>
         <img src={main} alt="job hunt" className="img main-img"></img>
       </div>
