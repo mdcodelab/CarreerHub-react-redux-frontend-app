@@ -27,3 +27,6 @@ npm install normalize.css
 #### 6) React Router
 
 #### 7) Error Page
+
+#### 16) Register Page - Setup
+

@@ -9,10 +9,7 @@ function Landing() {
   return (
     <Wrapper>
       <nav>
-            <article>
-            <Logo></Logo>
-            <span className="logo">CareerHub</span>
-            </article>
+            <Logo className="logo"></Logo>
       </nav>
       <div className="container page">
       {/* info*/}
@@ -21,7 +18,7 @@ function Landing() {
         <p>Welcome to CareerHub, the go-to platform for job seekers and employers! Browse through our job 
         postings, create your profile and apply for your 
         dream job today. Employers, post your job openings and find your next star employee.</p>
-        <button className="btn btn-hero"><Link to="/register">Login/Register</Link></button>
+        <button className="btn btn-hero landing"><Link to="/register">Login/Register</Link></button>
         </div>
         <img src={main} alt="job hunt" className="img main-img"></img>
       </div>
@@ -30,6 +27,9 @@ function Landing() {
 }
 
 const Wrapper = styled.main `
+nav .logo {
+    
+}
 nav {
     width: var(--fluid-width);
     max-width: var(--max-width);
@@ -37,7 +37,9 @@ nav {
     height: var(--nav-height);
     display: flex;
     align-items: center;
-} article {
+    padding-top: 2rem;
+} 
+article {
     width: max-content;
     height: 100%;
     display: flex;
@@ -84,7 +86,16 @@ p {
         display: block;
     }
 }
+@media (max-width: 400px) {
+    .logo {
+        width: 15rem;
+        height: 8rem;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}
+`
 
-`;
 
 export default Landing;

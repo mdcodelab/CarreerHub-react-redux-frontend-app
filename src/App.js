@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 //pages
 import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 import Error from "./pages/Error";
 
 function App() {

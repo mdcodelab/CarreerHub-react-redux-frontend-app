@@ -1,0 +1,7 @@
+ <svg width="300" height="50" viewBox="0 0 300 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="50" height="50" rx="10" fill="#3b82f6"/>
+    <text x="25" y="30" font-size="30" font-family="sans-serif" font-weight="bold" fill="#ffffff" 
+    text-anchor="middle" alignment-baseline="middle">CH</text>
+    <text x="70" y="40" font-size="30" font-family="sans-serif" fill="#3b82f6" 
+    font-weight="bold">CareerHub</text>
+</svg>
