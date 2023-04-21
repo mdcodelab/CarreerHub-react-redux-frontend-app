@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from "../components/Logo"
 import styled from "styled-components";
-import {useSelector} from "react-redux";
+import FormRow from "../components/FormRow";
 
 
 const initialState = {
@@ -18,6 +18,7 @@ function Register() {
 
     function onChange (e) {
         console.log(e.target.value);
+        setValues(e.target.value);
     }
 
     function onSubmit (e) {
@@ -33,25 +34,13 @@ function Register() {
         <h3>Login</h3>
 
         {/* name field */}
-        <div className='form-row'>
-          <label htmlFor='name' className="form-label">Name</label>
-
-          <input type='text'name='name' value={values.name} className='form-input' onChange={onChange}/>
-        </div>
+        <FormRow type="text" name="name" value={values.name} onChange={onChange}/>
 
          {/* email field */}
-         <div className='form-row'>
-          <label htmlFor='email' className='form-label'>Email</label>
-
-          <input type='email'name='email' className='form-input'/>
-        </div>
+         <FormRow type="email" name="email" value = {values.email} onChange={onChange}/>
 
         {/* password field */}
-        <div className='form-row'>
-          <label htmlFor='password' className='form-label'>Password</label>
-
-          <input type='password' name='password' className='form-input'/>
-        </div>
+        <FormRow type="password" name="password" value={values.password} onChange={onChange}/>
 
         <button type='submit' className='btn btn-block'>Submit</button>
       </form>

@@ -28,5 +28,8 @@ npm install normalize.css
 
 #### 7) Error Page
 
-#### 16) Register Page - Setup
+#### 8) Register Page - Setup
+
+#### 9) FormRow Component
+
 
