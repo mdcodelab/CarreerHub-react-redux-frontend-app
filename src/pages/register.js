@@ -26,15 +26,22 @@ function Register() {
         console.log("submitted");
     }
 
+    function toggleMember () {
+        setValues({...values, isMember: !values.isMember})
+    }
+
 
   return (
     <Wrapper className="full-page">
         <form className='form' onSubmit={onSubmit}>
         <Logo style={{background: "red"}}></Logo>
-        <h3>Login</h3>
+        {values.isMember ? <h3>Login</h3> : <h3>Register</h3>}
 
         {/* name field */}
-        <FormRow type="text" name="name" value={values.name} onChange={onChange}/>
+        {!values.isMember && (
+            <FormRow type="text" name="name" value={values.name} onChange={onChange}/>
+        )}
+        
 
          {/* email field */}
          <FormRow type="email" name="email" value = {values.email} onChange={onChange}/>
@@ -43,7 +50,14 @@ function Register() {
         <FormRow type="password" name="password" value={values.password} onChange={onChange}/>
 
         <button type='submit' className='btn btn-block'>Submit</button>
+        <div className="toggle">
+            {values.isMember ? <span>Not a member yet?</span> : <span>Already a member?</span> }
+            <button type="button" className="member-btn" onClick={()=>toggleMember()}>
+                {values.isMember ? "Register" : "Login"}
+            </button>
+        </div>
       </form>
+
     </Wrapper>
   );
 }
@@ -78,7 +92,17 @@ const Wrapper = styled.section`
     color: var(--primary-500);
     cursor: pointer;
     letter-spacing: var(--letterSpacing);
-  }`
+    display: inline-block;
+    margin-left: 0.3rem;
+  }
+  div.toggle {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  `
 
 export default Register;
 

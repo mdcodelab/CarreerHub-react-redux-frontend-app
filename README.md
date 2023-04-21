@@ -32,4 +32,6 @@ npm install normalize.css
 
 #### 9) FormRow Component
 
+#### 10) Toggle Member (in the Register)
+
 
