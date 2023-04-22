@@ -17,13 +17,24 @@ function Register() {
     const [values, setValues]=React.useState(initialState);
 
     function onChange (e) {
-        console.log(e.target.value);
-        setValues(e.target.value);
+        const name=e.target.name;
+        const value=e.target.value;
+        setValues({...values, [name]: value})
+        console.log(values);
     }
 
     function onSubmit (e) {
         e.preventDefault();
-        console.log("submitted");
+        const {name, email, password, isMember}=values;
+        if(!isMember) {
+            if(!name || !email || !password) {
+                console.log("Please fill al fields!")
+            }
+        } else {
+            if (!email || !password) {
+                console.log("hey!")
+            }
+        }
     }
 
     function toggleMember () {

@@ -34,4 +34,7 @@ npm install normalize.css
 
 #### 10) Toggle Member (in the Register)
 
+#### 11) Handle Change and Empty Values
+
+
 
