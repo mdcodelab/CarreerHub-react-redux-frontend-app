@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from "../components/Logo"
 import styled from "styled-components";
 import FormRow from "../components/FormRow";
+import { toast } from 'react-toastify';
 
 
 const initialState = {
@@ -28,11 +29,11 @@ function Register() {
         const {name, email, password, isMember}=values;
         if(!isMember) {
             if(!name || !email || !password) {
-                console.log("Please fill al fields!")
+                toast.error("Please fill all fields!")
             }
         } else {
             if (!email || !password) {
-                console.log("hey!")
+                toast.warning("Please fill all fields!")
             }
         }
     }

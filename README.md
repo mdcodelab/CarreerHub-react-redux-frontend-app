@@ -36,5 +36,47 @@ npm install normalize.css
 
 #### 11) Handle Change and Empty Values
 
+#### 12) React Toastify
+
+[React Toastify](https://www.npmjs.com/package/react-toastify)
+
+
+npm install --save react-toastify
+
+
+App.js:
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+return (
+<Router>
+<Routes/>
+<ToastContainer/>
+<Router/>
+)
+
+Register.js:
+import { toast } from 'react-toastify';
+
+if (!email || !password || (!isMember && !name)) {
+  toast.error('Please Fill Out All Fields');
+  return;
+}
+
+- modifications
+
+position
+
+<ToastContainer position='top-center' >
+
+index.css
+
+```css
+.Toastify__toast {
+  text-transform: capitalize;
+}
+```
+
 
 
