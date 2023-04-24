@@ -70,12 +70,57 @@ position
 
 <ToastContainer position='top-center' >
 
-index.css
 
-```css
-.Toastify__toast {
-  text-transform: capitalize;
-}
+### 13) User Slice - Setup
+
+- features/user/userSlice.js
+
+```js
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+
+const initialState = {
+  isLoading: false,
+  user: null,
+};
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+});
+
+export default userSlice.reducer;
+```
+
+- create store.js
+
+```js
+import { configureStore } from '@reduxjs/toolkit';
+
+import userSlice from './features/user/userSlice';
+
+export const store = configureStore({
+  reducer: {
+    user: userSlice,
+  },
+});
+```
+
+- index.js
+
+```js
+import { store } from './store';
+import { Provider } from 'react-redux';
+
+root.render(
+  <Provider store={store}>
+    <App tab='home' />
+  </Provider>
+);
+```
+
+```sh
+npm install @reduxjs/toolkit react-redux
 ```
 
 
