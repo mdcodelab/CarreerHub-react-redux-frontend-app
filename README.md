@@ -17,26 +17,41 @@ npm install normalize.css
 - SET BEFORE 'index.css'
 - replace contents of index.css
 
-
-#### 4) Landing Page - Setup
+--------------------------------------------------------------------
+#### 2) Landing Page - Setup
 - npm install styled-components
 
 
-#### 5) Logo Component
+--------------------------------------------------------------------
+#### 3) Logo Component
 
-#### 6) React Router
+----------------------------------------------------------------------
 
-#### 7) Error Page
+#### 4) React Router
 
-#### 8) Register Page - Setup
+-------------------------------------------------------------------
 
-#### 9) FormRow Component
+#### 5) Error Page
 
-#### 10) Toggle Member (in the Register)
+--------------------------------------------------------------------
 
-#### 11) Handle Change and Empty Values
+#### 6) Register Page - Setup
 
-#### 12) React Toastify
+----------------------------------------------------------------
+
+#### 7) FormRow Component
+
+----------------------------------------------------------------
+
+#### 8) Toggle Member (in the Register)
+
+-------------------------------------------------------------
+
+#### 9) Handle Change and Empty Values
+
+----------------------------------------------------------
+
+#### 10) React Toastify
 
 [React Toastify](https://www.npmjs.com/package/react-toastify)
 
@@ -70,8 +85,10 @@ position
 
 <ToastContainer position='top-center' >
 
+--------------------------------------------------------------------
 
-### 13) User Slice - Setup
+
+### 11) User Slice - Setup
 
 - features/user/userSlice.js
 
@@ -122,8 +139,8 @@ root.render(
 npm install @reduxjs/toolkit react-redux
 ```
 
-
-#### 14) RegisterUser, LoginUser - Placeholders
+---------------------------------------------------------------------
+#### 12) RegisterUser, LoginUser - Placeholders
 
 - userSlice.js
 
@@ -165,6 +182,95 @@ const onSubmit = (e) => {
     }
     dispatch(registerUser({ name, email, password }));
   };
+```
+--------------------------------------------------------------
+
+#### 13) HTTP Methods
+
+- GET - get resources from the server
+- POST - submit resource to the server
+- PUT/PATCH - modify resource on the server
+- DELETE - delete resource form the server
+
+```js
+// GET
+axios.get(url, options);
+// POST
+axios.post(url, resource, options);
+// PATCH
+axios.patch(url, resource, options);
+// DELETE
+axios.delete(url, options);
+```
+
+```sh
+npm install axios
+```
+
+----------------------------------------------------------------------
+#### 14) API
+
+- Root URL
+- https://jobify-prod.herokuapp.com/api/v1/toolkit
+
+NODE
+###### Register USER
+
+- https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/register
+
+- POST /auth/register
+- {name:'john',email:'john@gmail.com',password:'secret'}
+- sends back the user object with token
+
+###### Register USER - TESTING()
+
+- POST /auth/testingRegister
+- {name:'john',email:'john@gmail.com',password:'secret'}
+- sends back the user object with token
+
+###### Login USER
+
+- POST /auth/login
+- {email:'john@gmail.com',password:'secret'}
+- sends back the user object with token
+
+###### Update USER
+
+- PATCH /auth/updateUser
+- { email:'john@gmail.com', name:'john', lastName:'smith', location:'my location' }
+- sends back the user object with token
+---------------------------------------------------------------
+
+
+  #### 15) Custom Axios Instance
+
+- utils/axios.js
+
+```js
+import axios from 'axios';
+
+const customFetch = axios.create({
+  baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit',
+});
+
+export default customFetch;
+```
+
+userSlice.js
+``js
+import customFetch from '../../utils/axios';
+
+export const registerUser = createAsyncThunk(
+  'user/registerUser',
+  async (user, thunkAPI) => {
+    try {
+      const resp = await customFetch.post('/auth/testingRegister', user);
+      console.log(resp);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+);
 ```
 
 
