@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 //pages
 import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
-import Register from "./pages/Register";
+import Register from "./pages/Register"
 import Error from "./pages/Error";
 
 function App() {
