@@ -33,17 +33,20 @@ function Register() {
         e.preventDefault();
         const {name, email, password, isMember}=values;
         if(!isMember) {
-            if(!name || !email || !password) {
+             if(!name || !email || !password) {
                 toast.error("Please fill all fields!")
                 return
-            }
+             }
         } else {
-            if (!email || !password) {
-                toast.warning("Please fill all fields!")
-            }
+              if (!email || !password) {
+                toast.warning("Please fill all fields!");
+                return
+              }
             dispatch(loginUser({ email: email, password: password }));
-        return;
-        }dispatch(registerUser({name: name, email: email, password: password}))
+            return
+        }
+        dispatch(registerUser({name: name, email: email, password: password}))
+        return
 
     }
 
@@ -70,7 +73,7 @@ function Register() {
         {/* password field */}
         <FormRow type="password" name="password" value={values.password} onChange={onChange}/>
 
-        <button type='submit' className='btn btn-block'>Submit</button>
+        <button type='submit' className='btn btn-block' disaabled={isLoading}>Submit</button>
         <div className="toggle">
             {values.isMember ? <span>Not a member yet?</span> : <span>Already a member?</span> }
             <button type="button" className="member-btn" onClick={()=>toggleMember()}>
