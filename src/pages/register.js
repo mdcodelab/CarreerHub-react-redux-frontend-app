@@ -73,7 +73,7 @@ function Register() {
         {/* password field */}
         <FormRow type="password" name="password" value={values.password} onChange={onChange}/>
 
-        <button type='submit' className='btn btn-block' disaabled={isLoading}>Submit</button>
+        <button type='submit' className='btn btn-block' disabled={isLoading}>{isLoading ? "Loading..." : "Submit"}</button>
         <div className="toggle">
             {values.isMember ? <span>Not a member yet?</span> : <span>Already a member?</span> }
             <button type="button" className="member-btn" onClick={()=>toggleMember()}>

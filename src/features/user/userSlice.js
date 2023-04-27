@@ -25,13 +25,22 @@ export const registerUser = createAsyncThunk("user/registerUser", async (user, t
 
 export const loginUser = createAsyncThunk("user/loginUser", async (user, thunkAPI) => {
     //console.log(`login user ${user}`)
-} )
+    try {
+        const response = await customFetch.post("/auth/login", user);
+        return response.data;
+    } catch (error) {
+        toast.error(error.response.data.msg);//set from API
+        return thunkAPI.rejectWithValue(error.response.data.msg)
+        console.log(error.response);
+    }
+})
 
 const userSlice=createSlice({
 name: "user",
 initialState,
 extraReducers: (builder) => {
     builder
+    //registerUser
     .addCase(registerUser.pending, (state) => {
         state.isLoading = true;})
 
@@ -39,14 +48,28 @@ extraReducers: (builder) => {
             const { user } = payload;
             state.isLoading = false;
             state.user = user;
-            toast.success(`Hello There ${user.name}`);
+            toast.success(`Hello There ${user.name}!`);
           })
 
           .addCase(registerUser.rejected, (state, { payload }) => {
             state.isLoading = false;
             toast.error(payload);
-          })
+          })  
+          //loginUser
+          .addCase(loginUser.pending, (state) => {
+            state.isLoading = true;})
     
+            .addCase(loginUser.fulfilled, (state, { payload }) => {
+                const { user } = payload;
+                state.isLoading = false;
+                state.user = user;
+                toast.success(`Welcome back ${user.name}!`);
+              })
+    
+            .addCase(loginUser.rejected, (state, { payload }) => {
+                state.isLoading = false;
+                toast.error(payload);
+              })  
 }
 
 })
