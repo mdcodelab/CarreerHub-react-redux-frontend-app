@@ -340,8 +340,73 @@ extraReducers:
         toast.error(payload);
       })
   }
-
 ```
+
+### 18) Login localStorage
+
+- utils/localStorage.js
+
+```js
+export const addUserToLocalStorage = (user) => {
+  localStorage.setItem('user', JSON.stringify(user));
+};
+
+export const removeUserFromLocalStorage = () => {
+  localStorage.removeItem('user');
+};
+
+export const getUserFromLocalStorage = () => {
+  const result = localStorage.getItem('user');
+  const user = result ? JSON.parse(result) : null;
+  return user;
+};
+```
+
+- invoke getUserFromLocalStorage when app loads (set it equal to user)
+
+```js
+const initialState = {
+  isLoading: false,
+  user: getUserFromLocalStorage(),
+};
+
+ builder
+    //registerUser
+    .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;})
+
+        .addCase(registerUser.fulfilled, (state, { payload }) => {
+            const { user } = payload;
+            state.isLoading = false;
+            state.user = user;
+            addUserToLocalStorage(user);/////////////////
+            toast.success(`Hello There ${user.name}!`);
+          })
+
+          .addCase(registerUser.rejected, (state, { payload }) => {
+            state.isLoading = false;
+            toast.error(payload);
+          })  
+          //loginUser
+          .addCase(loginUser.pending, (state) => {
+            state.isLoading = true;})
+    
+            .addCase(loginUser.fulfilled, (state, { payload }) => {
+                const { user } = payload;
+                state.isLoading = false;
+                state.user = user;
+                addUserToLocalStorage(user); ////////////////////////
+                toast.success(`Welcome back ${user.name}!`);
+              })
+    
+            .addCase(loginUser.rejected, (state, { payload }) => {
+                state.isLoading = false;
+                toast.error(payload);
+              })  
+}
+
+
+
 
 
 
