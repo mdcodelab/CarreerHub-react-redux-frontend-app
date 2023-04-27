@@ -436,7 +436,7 @@ import {
   SharedLayout,
   Stats,
   AddJob,
-} from './dashboard/...';
+} from './dashboardPages/...';
 
 function App() {
   return (
@@ -457,6 +457,37 @@ function App() {
   );
 }
 ```
+--------------------------------------------------------
+### 21) Navbar, SmallSidebar, BigSidebar
+
+- create Navbar, SmallSidebar, BigSidebar in components
+
+```js
+SharedLayout.js;
+
+import { Outlet } from 'react-router-dom';
+import Navbar etc.
+
+const SharedLayout = () => {
+  return (
+    <>
+      <Wrapper>
+        <main className='dashboard'>
+          <SmallSidebar />
+          <BigSidebar />
+          <div>
+            <Navbar />
+            <div className='dashboard-page'>
+              <Outlet />
+            </div>
+          </div>
+        </main>
+      </Wrapper>
+    </>
+  );
+};
+
+------------------------------------------------------------
 
 
 
