@@ -5,6 +5,7 @@ import FormRow from "../components/FormRow";
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, registerUser } from '../features/user/userSlice';
+import { useLocation } from 'react-router-dom';
 
 
 const initialState = {
@@ -47,8 +48,18 @@ function Register() {
         }
         dispatch(registerUser({name: name, email: email, password: password}))
         return
-
     }
+
+    const location=useLocation();
+
+    React.useEffect(() => {
+      if(user) {
+        setTimeout(() => {
+          window.location.href="/"
+        }, 2000)
+      }
+    }, [user])
+
 
     function toggleMember () {
         setValues({...values, isMember: !values.isMember})

@@ -405,6 +405,21 @@ const initialState = {
               })  
 }
 
+---------------------------------------------------------------------------------
+
+### 19) Programmatically Navigate To Dashboard
+Register.js:
+
+const location=useLocation();
+
+    React.useEffect(() => {
+      if(user) {
+        setTimeout(() => {
+          window.location.href="/"
+        }, 2000)
+      }
+    }, [user])
+
 
 
 
