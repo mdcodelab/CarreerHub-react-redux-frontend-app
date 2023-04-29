@@ -1,13 +1,38 @@
 import React from 'react';
 import styled from "styled-components";
+import {FaAlignLeft, FaUserCircle, FaCaretDown} from "react-icons/fa";
+import Logo from "../components/Logo";
+import {useSelector, useDispatch} from "react-redux";
 
 function Navbar() {
+  const {user}=useSelector(store => store.user);
+  const dispatch = useDispatch();
   return (
     <Wrapper>
-      <h2>Navbar</h2>
-
-    </Wrapper>
-  )
+    <div className='nav-center'>
+      <button type='button' className='toggle-btn' onClick={()=> console.log("toggle")}>
+        <FaAlignLeft /></button>
+      <div>
+        <WrapperLogo> <Logo className="logo"/></WrapperLogo>
+        <h3 className='logo-text'>dashboard</h3>
+      </div>
+      <div className='btn-container'>
+        <button type='button'className='btn'onClick={() => console.log("hello")}>
+          <FaUserCircle />
+          {user?.name}
+          <FaCaretDown />
+        </button>
+        <div className="dropdown show-dropdown">
+          <button type='button' className='dropdown-btn' 
+          onClick={() => console.log("log out")}>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+    )
+  
 }
 
 const Wrapper = styled.nav`
@@ -16,16 +41,15 @@ const Wrapper = styled.nav`
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.1);
-  .logo {
-    display: flex;
-    align-items: center;
-    width: 100px;
-  }
   .nav-center {
     display: flex;
     width: 90vw;
     align-items: center;
     justify-content: space-between;
+  }
+  .logo {
+    height: 3rem;
+    border: 2px solid red;
   }
   .toggle-btn {
     background: transparent;
@@ -90,5 +114,11 @@ const Wrapper = styled.nav`
       display: block;
     }
   }`
+
+  const WrapperLogo = styled.div `
+  margin-top: -1.5rem;
+  margin-bottom: -0.5rem;
+  height: max-content;
+  `
 
 export default Navbar;

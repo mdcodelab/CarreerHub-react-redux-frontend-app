@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Logobis() {
   return (
     <Wrapper>
-        <h1 className="title" style={{color: "white", background: "var(--primary-500"}}>CH</h1>
+        <h1 className="title" style={{color: "white", background: "var(--primary-500)"}}>CH</h1>
         <h2>CarreerHub</h2>
       
     </Wrapper>
