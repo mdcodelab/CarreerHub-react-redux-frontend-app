@@ -7,7 +7,8 @@ import {addUserToLocalStorage, removeUserFromLocalStorage, getUserFromLocalStora
 
 const initialState={
 isLoading: false,
-user: getUserFromLocalStorage()
+user: getUserFromLocalStorage(),
+isSidebarOpen: false
 }
 
 export const registerUser = createAsyncThunk("user/registerUser", async (user, thunkAPI) => {
@@ -39,6 +40,11 @@ export const loginUser = createAsyncThunk("user/loginUser", async (user, thunkAP
 const userSlice=createSlice({
 name: "user",
 initialState,
+reducers : {
+toggleSidebar:  (state) => {
+state.isSidebarOpen = !state.isSidebarOpen;
+}
+},
 extraReducers: (builder) => {
     builder
     //registerUser
@@ -74,9 +80,10 @@ extraReducers: (builder) => {
                 toast.error(payload);
               })  
 }
-
 })
+
+export const {toggleSidebar} = userSlice.actions
 
 export default userSlice.reducer;
 
-console.log(userSlice.reducer)
+console.log(userSlice.reducer);

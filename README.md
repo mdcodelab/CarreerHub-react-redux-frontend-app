@@ -527,6 +527,40 @@ const [logout, setLogout]=React.useState(false);
     </div>
   </Wrapper>
     )
+    --------------------------------------------------------
+
+    ### 25) Toggle Sidebar
+  
+userSlice.js
+
+```js
+const initialState = {
+  isLoading: false,
+  isSidebarOpen: false,
+  user: getUserFromLocalStorage(),
+};
+
+reducers: {
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
+  },
+
+export const { toggleSidebar } = userSlice.actions;
+
+```
+
+Navbar.js
+
+```js
+import { toggleSidebar } from '../features/user/userSlice';
+
+
+<button type='button' className='toggle-btn' onClick={()=> dispatch(toggleSidebar())}>
+  <FaAlignLeft />
+</button>;
+---------------------------------------------------
+
 
 
 
