@@ -493,6 +493,40 @@ const SharedLayout = () => {
 - BigSidebar,SmallSidebar and Navbar
 ------------------------------------------------------------
 
+### 23) Navbar setup
+-----------------------------------------------------------
+### 24) Toggle Dropdown
+
+```js
+Navbar.js
+const [logout, setLogout]=React.useState(false);
+
+  return (
+    <Wrapper>
+    <div className='nav-center'>
+      <button type='button' className='toggle-btn' onClick={()=> console.log("toggle")}>
+        <FaAlignLeft /></button>
+      <div>
+        <WrapperLogo> <Logo /></WrapperLogo>
+        <h3 className='logo-text'>dashboard</h3>
+      </div>
+      <div className='btn-container'>
+        <button type='button'className='btn' onClick={() => setLogout(!logout)}>
+          <FaUserCircle />
+          {user?.name}
+          <FaCaretDown />
+        </button>
+        <div className={logout ? "dropdown show-dropdown" : "dropdown"}>
+          <button type='button' className='dropdown-btn' 
+          onClick={() => console.log("logout")}>
+            Logout
+          </button>
+        </div>
+        
+      </div>
+    </div>
+  </Wrapper>
+    )
 
 
 

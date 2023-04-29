@@ -5,6 +5,8 @@ import Logo from "../components/Logo";
 import {useSelector, useDispatch} from "react-redux";
 
 function Navbar() {
+  const [logout, setLogout]=React.useState(false);
+
   const {user}=useSelector(store => store.user);
   const dispatch = useDispatch();
   return (
@@ -13,21 +15,22 @@ function Navbar() {
       <button type='button' className='toggle-btn' onClick={()=> console.log("toggle")}>
         <FaAlignLeft /></button>
       <div>
-        <WrapperLogo> <Logo className="logo"/></WrapperLogo>
+        <WrapperLogo> <Logo /></WrapperLogo>
         <h3 className='logo-text'>dashboard</h3>
       </div>
       <div className='btn-container'>
-        <button type='button'className='btn'onClick={() => console.log("hello")}>
+        <button type='button'className='btn' onClick={() => setLogout(!logout)}>
           <FaUserCircle />
           {user?.name}
           <FaCaretDown />
         </button>
-        <div className="dropdown show-dropdown">
+        <div className={logout ? "dropdown show-dropdown" : "dropdown"}>
           <button type='button' className='dropdown-btn' 
-          onClick={() => console.log("log out")}>
+          onClick={() => console.log("logout")}>
             Logout
           </button>
         </div>
+        
       </div>
     </div>
   </Wrapper>
