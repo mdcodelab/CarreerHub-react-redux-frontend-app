@@ -28,7 +28,7 @@ h1.title {
 }
 h2 {
 color: var(--primary-500);
-margin-left: 1rem;
+margin-left: 0.8rem;
 font-size: 1.7rem;
 font-weight: 700;
 letter-spacing: 0.2rem;
