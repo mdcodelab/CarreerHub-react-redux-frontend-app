@@ -22,7 +22,7 @@ function BigSidebar() {
                   {links.map((link) => {
                     const {id, text, path, icon}=link
                       return <NavLink to={path} key={id} 
-                      className={({isActive}) => isActive ? "nav-link active" : "nav-link"} onClick={()=> dispatch(toggleSidebar())}>
+                      className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>
                       <span className="icon">
                       {icon}</span>{text}
                       </NavLink>
