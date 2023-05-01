@@ -4,6 +4,8 @@ import Logo from "../components/Logo"
 import styled from "styled-components";
 import {useSelector, useDispatch} from 'react-redux';
 import { toggleSidebar } from '../features/user/userSlice';
+import links from ".././utils/links";
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -22,7 +24,14 @@ const dispatch=useDispatch();
                   <Logo></Logo>
                 </header>
                 <div className="nav-links">
-                  nav-links
+                  {links.map((link) => {
+                    const {id, text, path, icon}=link
+                      return <NavLink to={path} key={id} 
+                      className={({isActive}) => isActive ? "nav-link active" : "nav-link"} onClick={()=> dispatch(toggleSidebar())}>
+                      <span className="icon">
+                      {icon}</span>{text}
+                      </NavLink>
+                  })}
                 </div>
               </div>
 
@@ -75,6 +84,9 @@ const Wrapper = styled.aside`
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    height: 10rem;
+    width: 20rem;
   }
   .nav-link {
     display: flex;
