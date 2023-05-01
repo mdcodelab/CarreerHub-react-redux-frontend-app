@@ -12,17 +12,23 @@ import Stats from "./dashboardPages/Stats";
 import Landing from "./pages/Landing";
 import Register from "./pages/Register";
 import Error from "./pages/Error";
+//protected route
+import ProtectedRoute from './pages/ProtectedRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<SharedLayout></SharedLayout>}>
-            <Route index element={<Stats></Stats>}></Route>
-            <Route path="all-jobs" element={<AllJobs></AllJobs>}></Route>
-            <Route path="add-job" element={<AddJob></AddJob>}></Route>
-            <Route path="profile" element={<Profile></Profile>}></Route> 
-      </Route>
+      <Route path='/' element={
+            <ProtectedRoute>
+              <SharedLayout />
+            </ProtectedRoute>}>
+          <Route index element={<Stats />} />
+          <Route path='all-jobs' element={<AllJobs />} />
+          <Route path='add-job' element={<AddJob />} />
+          <Route path='profile' element={<Profile />} />
+        </Route>
+
         <Route path="landing" element={<Landing></Landing>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
         <Route path="*" element={<Error></Error>}></Route>

@@ -124,6 +124,9 @@ const Wrapper = styled.nav`
   margin-top: -1.5rem;
   margin-bottom: -0.5rem;
   height: max-content;
+  @media (min-width: 992px){
+    display: none;
+  }
   `
 
 export default Navbar;
