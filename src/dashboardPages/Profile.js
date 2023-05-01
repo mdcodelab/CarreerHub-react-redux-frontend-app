@@ -3,7 +3,7 @@ import FormRow from '../components/FormRow';
 import { toast } from "react-toastify";
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-
+import {updateUser} from "../features/user/userSlice";
 
 
 function Profile() {
@@ -17,25 +17,27 @@ function Profile() {
     location: user?.location || ""
   });
 
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      const {name, email, lastName, location}=userData;
-      if(!name || !email || lastName || location) {
-        toast.error("Please fill out all fields!");
-        return;
-      }
-  }
-
+  
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUserData({...userData, [name]: value})
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const {name, email, lastName, location}=userData;
+    if(!name || !email || !lastName || !location) {
+      toast.error("Please fill out all fields!");
+      return;
+    }
+    dispatch(updateUser(userData));
+}
   
 
   return (
     <Wrapper>
-        <form className="form" on Submit ={handleSubmit}>
+        <form className="form" onSubmit ={handleSubmit}>
             <h3>Profile</h3>
             <div className="form-center">
                 <FormRow type="text" name="name" value={userData.name} onChange={handleChange}></FormRow>
