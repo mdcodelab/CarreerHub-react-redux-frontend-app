@@ -628,5 +628,27 @@ App.js
 --------------------------------------------------------------
 #### 28) Small Sidebar - Setup
 -------------------------------------------------------------
+### 29) Small Sidebar Toggle
 
+mallSidebar.js;
+
+```js
+import { toggleSidebar } from '../features/user/userSlice';
+
+
+const { isSidebarOpen } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+
+return (
+  <div className={isSidebarOpen ? 'sidebar-container show-sidebar' : 'sidebar-container'}>
+    <div className='content'>
+        <button type='button' className='close-btn' onClick={()=> dispatch(toggleSidebar())}>
+          <FaTimes />
+        </button>
+
+);
+```
+
+#### 42) Setup Links
 

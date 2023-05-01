@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <Wrapper>
     <div className='nav-center'>
-      <button type='button' className='toggle-btn' onClick={()=> ()=> dispatch(toggleSidebar())}>
+      <button type='button' className='toggle-btn' onClick={()=> dispatch(toggleSidebar())}>
         <FaAlignLeft /></button>
       <div>
         <WrapperLogo> <Logo /></WrapperLogo>
