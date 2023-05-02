@@ -869,3 +869,58 @@ export const store = configureStore({
 });
 ```
 ------------------------------------------------------------------------
+#### 37) AddJob Structure
+
+AddJobs.js
+````js
+import React from 'react';
+import styled from "styled-components";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from 'react-redux';
+import FormRow from "../components/FormRow";
+
+function AddJob() {
+  const {isLoading, position, company, jobLocation, jobType, jobTypeOptions, status,
+  statusOptions, isEditing, editJobId}=useSelector((state)=> state.job);
+  const dispatch=useDispatch();
+
+  const onChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name, value);
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if(!position || !company || !jobLocation) {
+      toast.warning("Please Fill Out All Fields!");
+      return;
+    }
+  }
+  
+  return (
+    <Wrapper>
+          <form className="form">
+            <h3>{isEditing ? "Edit Job" : "Add Job"}</h3>
+            <div className="form-center">
+              {/* position */}
+              <FormRow type="text" name="position" value={position} onChange={onChange}></FormRow>
+                {/* company */}
+              <FormRow type="text" name="company" value={company} onChange={onChange}></FormRow>
+                {/* jobLocation */}
+              <FormRow type="text" name="jobLocation" labelText="Job Location" 
+              value={jobLocation} onChange={onChange}></FormRow>
+              <div className="btn-container">
+                <button type="button" className="btn btn-block clear-btn" 
+                    onClick={()=> console.log("clear values")}>Clear</button>
+                <button type="submit" className="btn btn-block submit-btn" disabled={isLoading}
+                    onClick={onSubmit}>Submit</button>
+              </div>
+            </div>
+          </form>
+    </Wrapper>
+  );
+}
+``
+------------------------------------------------------------------------------
+#### 38) 
