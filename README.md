@@ -1024,3 +1024,36 @@ const handleJobInput = (e) => {
 };
 ```
 ------------------------------------------------------------
+### 40) User Slice - handleClear Reducer
+
+```js
+
+    // reducers
+    handleClear: () => {
+      return {
+        ...initialState
+      };
+      return initialState
+    },
+
+export const { handleChange, handleClear } = jobSlice.actions;
+
+
+```
+
+AddJob.js
+
+```js
+import { handleClear, handleChange } from '../../features/job/jobSlice';
+
+return (
+  <button
+    type='button'
+    className='btn btn-block clear-btn'
+    onClick={() => dispatch(handleClear())}
+  >
+    clear
+  </button>
+);
+```
+-----------------------------------------------------------

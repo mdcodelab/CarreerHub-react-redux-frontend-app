@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux';
 import FormRow from "../components/FormRow";
-import FormRowSelect from '../components/FormRowSelect';
-import { handleChange } from '../features/job/jobSlice';
+//import FormRowSelect from '../components/FormRowSelect';
+import { handleChange, handleClear } from '../features/job/jobSlice';
 
 function AddJob() {
   const {isLoading, position, company, jobLocation, jobType, jobTypeOptions, status,
@@ -65,7 +65,7 @@ function AddJob() {
           <button
             type='button'
             className='btn btn-block clear-btn'
-            onClick={() => console.log("clear")}>
+            onClick={() => dispatch(handleClear())}>
             Clear
           </button>
           <button
@@ -128,6 +128,22 @@ const Wrapper = styled.section`
   .clear-btn:hover {
     background: var(--black);
   }
+  select {
+    width: 100%;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  background: var(--primary-50);
+  transition: all 0.2s;
+  }
+  &:focus {
+    border-color: grey;
+    border: 0.15rem solid var(--primary-100);
+  }
+  option {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    padding: 3rem;
+  }
   @media (min-width: 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;
@@ -145,20 +161,5 @@ const Wrapper = styled.section`
     .form-center button {
       margin-top: 0;
     }
-  select {
-    width: 100%;
-  padding: 0.4rem;
-  border-radius: 0.3rem;
-  background: var(--primary-50);
-  transition: all 0.2s;
-  }
-  &:focus {
-    border-color: grey;
-    border: 0.15rem solid var(--primary-100);
-  }
-  option {
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-    padding: 3rem;
-  }}`
+  }`
 export default AddJob;
