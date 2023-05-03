@@ -1038,22 +1038,71 @@ const handleJobInput = (e) => {
 
 export const { handleChange, handleClear } = jobSlice.actions;
 
+```
 
+
+#### 41) Add Job
+jobSlice.js
+
+```js
+export const createJob = createAsyncThunk('job/createJob', async (job, thunkAPI) => {
+      try {
+        const resp = await customFetch.post('/jobs', job, {
+          headers: {
+            authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+            //authorization: `Bearer`,
+          },
+        });
+        thunkAPI.dispatch(handleClear());
+        return resp.data;
+      } catch (error) {
+        if (error.response.status === 401) {
+            thunkAPI.dispatch(logoutUser());
+            return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
+          }
+        // basic setup
+        return thunkAPI.rejectWithValue(error.response.data.msg);
+      }
+    }
+  );
+  `````
+  / extra reducers
+
+extraReducers: {
+    builder: (state) => {
+      state.isLoading = true;
+    },
+    builder: (state, action) => {
+      state.isLoading = false;
+      toast.success('Job Created');
+    },
+    builder: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+}
 ```
 
 AddJob.js
 
 ```js
-import { handleClear, handleChange } from '../../features/job/jobSlice';
+import {
+  clearValues,
+  handleChange,
+  createJob,
+} from '../../features/job/jobSlice';
 
-return (
-  <button
-    type='button'
-    className='btn btn-block clear-btn'
-    onClick={() => dispatch(handleClear())}
-  >
-    clear
-  </button>
-);
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (!position || !company || !jobLocation) {
+    toast.error('Please Fill Out All Fields');
+    return;
+  }
+
+  dispatch(createJob({ position, company, jobLocation, jobType, status }));
+};
 ```
------------------------------------------------------------
+----------------------------------------------------------------------
+
+#### 42) Use Existing User Location
