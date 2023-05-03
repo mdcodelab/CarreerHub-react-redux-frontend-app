@@ -4,7 +4,7 @@ import customFetch from "../../utils/axios";
 import { getUserFromLocalStorage } from '../../utils/localStorage';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../user/userSlice';
-const {user}=getUserFromLocalStorage();
+
 
 
 const initialState={

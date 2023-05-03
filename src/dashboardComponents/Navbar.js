@@ -28,7 +28,7 @@ function Navbar() {
         </button>
         <div className={logout ? "dropdown show-dropdown" : "dropdown"}>
           <button type='button' className='dropdown-btn' 
-          onClick={() => dispatch(logoutUser())}>
+          onClick={() => dispatch(logoutUser("Logging Out ..."))}>
             Logout
           </button>
         </div>

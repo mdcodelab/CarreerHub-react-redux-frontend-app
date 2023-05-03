@@ -31,9 +31,13 @@ export const loginUser = createAsyncThunk("user/loginUser", async (user, thunkAP
         const response = await customFetch.post("/auth/login", user);
         return response.data;
     } catch (error) {
+      if(error.response.status = 401) {
+        thunkAPI.dispatch(logoutUser());
+        return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
+      }
         //toast.error(error.response.data.msg);//set from API
         return 
-        console.log(error.response);
+
     }
 })
 
@@ -67,10 +71,13 @@ reducers : {
 toggleSidebar:  (state) => {
 state.isSidebarOpen = !state.isSidebarOpen;
 },
-logoutUser: (state) => {
+logoutUser: (state, {payload}) => {
 state.user=null
 state.isSidebarOpen=false
-localStorage.removeItem("user")
+localStorage.removeItem("user");
+if(payload) {
+  toast.success("Logging Out...")
+}
 }
 },
 extraReducers: (builder) => {
