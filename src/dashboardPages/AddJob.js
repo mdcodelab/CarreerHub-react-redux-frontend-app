@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux';
 import FormRow from "../components/FormRow";
 import FormRowSelect from '../components/FormRowSelect';
+import { handleChange } from '../features/job/jobSlice';
 
 function AddJob() {
   const {isLoading, position, company, jobLocation, jobType, jobTypeOptions, status,
@@ -15,6 +16,7 @@ function AddJob() {
     const name = e.target.name;
     const value = e.target.value;
     console.log(name, value);
+    dispatch(handleChange({name, value}));
   }
 
   const onSubmit = (e) => {
@@ -33,14 +35,32 @@ function AddJob() {
         {/* position */}
         <FormRow type='text' name='position' value={position} onChange={onChange}/>
         {/* company */}
-        <FormRow type='text' name='company' value={company} onChange={onChange}
-        />
+        <FormRow type='text' name='company' value={company} onChange={onChange}/>
         {/* jobLocation */}
-        <FormRow type='text' name='jobLocation' labelText='Job Location' value={jobLocation} onChange={onChange}/>
+        <FormRow type='text' name='jobLocation' labelText='Job Location' value={jobLocation} 
+        onChange={onChange}/>
+        {/* job type */}       
+        <div className="form-row">
+        <label htmlFor="jobType" className="form-label">Job Type</label>
+        <select name="jobType" value={jobType} onChange={onChange}>
+            {jobTypeOptions.map((option, index)=> {
+              return <option key={index} value={option}>{option}</option>
+            })}
+        </select>
+        </div>
         {/* status */}
-        <FormRowSelect name="status" value={status} labelText="Status" list={statusOptions} onChange={onChange} id="status"></FormRowSelect>
+        <div className="form-row">
+        <label htmlFor="status" className="form-label">Status</label>
+          <select name="status" value={status} onChange={onChange}>
+            {statusOptions.map((option, index)=> {
+              return <option key={index} value={option}>{option}</option>
+            })}
+          </select>
+        </div>
+        
         {/* job type*/}
-        <FormRowSelect name="jobType" value={jobType} labelText="Job Type" list={jobTypeOptions} onChange={onChange} id="jobType"></FormRowSelect>
+        
+        
         <div className='btn-container'>
           <button
             type='button'
@@ -81,6 +101,7 @@ const Wrapper = styled.section`
   }
   .form-row {
     margin-bottom: 0;
+
   }
   .form-center {
     display: grid;
@@ -124,6 +145,20 @@ const Wrapper = styled.section`
     .form-center button {
       margin-top: 0;
     }
+  select {
+    width: 100%;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  background: var(--primary-50);
+  transition: all 0.2s;
   }
-`
+  &:focus {
+    border-color: grey;
+    border: 0.15rem solid var(--primary-100);
+  }
+  option {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    padding: 3rem;
+  }}`
 export default AddJob;

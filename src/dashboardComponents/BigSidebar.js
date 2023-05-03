@@ -65,12 +65,13 @@ const Wrapper = styled.aside`
       padding-top: 2rem;
       display: flex;
       flex-direction: column;
+      height: 25rem;
     }
     .nav-link {
       display: flex;
       align-items: center;
       color: var(--grey-500);
-      padding: 1rem 0;
+      padding: 1.5rem 0;
       padding-left: 2.5rem;
       text-transform: capitalize;
       font-size: 1.3rem;

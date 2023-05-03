@@ -69,7 +69,7 @@ function Register() {
   return (
     <Wrapper className="full-page">
         <form className='form' onSubmit={onSubmit}>
-        <Logo style={{background: "red"}}></Logo>
+        <WrapperLogo><Logo></Logo></WrapperLogo>
         {values.isMember ? <h3>Login</h3> : <h3>Register</h3>}
 
         {/* name field */}
@@ -100,11 +100,6 @@ function Register() {
 const Wrapper = styled.section`
   display: grid;
   align-items: center; 
-
-  .logo {
-    margin-top: -5rem;
-    border: 2px solid red;
-  }
   .form {
     max-width: 400px;
     border-top: 5px solid var(--primary-500);
@@ -138,6 +133,16 @@ const Wrapper = styled.section`
     justify-content: center;
   }
   `
+
+  const WrapperLogo = styled.div `
+  margin: 0 auto;
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  `;
+
 
 export default Register;
 

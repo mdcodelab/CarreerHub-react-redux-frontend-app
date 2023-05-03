@@ -31,8 +31,8 @@ export const loginUser = createAsyncThunk("user/loginUser", async (user, thunkAP
         const response = await customFetch.post("/auth/login", user);
         return response.data;
     } catch (error) {
-        toast.error(error.response.data.msg);//set from API
-        return thunkAPI.rejectWithValue(error.response.data.msg)
+        //toast.error(error.response.data.msg);//set from API
+        return 
         console.log(error.response);
     }
 })
@@ -49,10 +49,10 @@ export const updateUser = createAsyncThunk('user/updateUser', async (user, thunk
         });
         return resp.data;
       } catch (error) {
-        console.log(error.response);
+        //console.log(error.response);
         if(error.response.status === 401) {  //authentication error (happens when we remove the token)
                 thunkAPI.dispatch(logoutUser());
-                toast.warning("Unauthorized! Logging out ...");
+                //toast.warning("Unauthorized! Logging out ...");
                 return thunkAPI.rejectWithValue("Unauthorized! Logging out ...");
         }
         return thunkAPI.rejectWithValue(error.response.data.msg);
@@ -131,3 +131,5 @@ export const {toggleSidebar, logoutUser} = userSlice.actions
 export default userSlice.reducer;
 
 //console.log(userSlice.reducer);
+
+

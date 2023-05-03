@@ -1001,3 +1001,26 @@ AddJob.js
 />
 ```
 ------------------------------------------------------------------
+
+### 39) Handle Change reducer
+```js
+    // reducers
+    handleChange: (state, { payload: { name, value } }) => {
+      state[name] = value;
+    },
+
+export const { handleChange } = jobSlice.actions;
+```
+
+AddJob.js
+
+```js
+import { handleChange } from '../../features/job/jobSlice';
+
+const handleJobInput = (e) => {
+  const name = e.target.name;
+  const value = e.target.value;
+  dispatch(handleChange({ name, value }));
+};
+```
+------------------------------------------------------------
