@@ -10,7 +10,15 @@ function AddJob() {
   const {isLoading, position, company, jobLocation, jobType, jobTypeOptions, status,
   statusOptions, isEditing, editJobId}=useSelector((state)=> state.job);
   const dispatch=useDispatch();
-  
+
+  const {user}=useSelector((store) => store.user);
+  React.useEffect(()=> {
+    //eventually will check for isEditing
+    if(!isEditing) {
+      dispatch(handleChange({name: "jobLocation", value: user.location}))
+    }
+
+  }, []);
 
   const onChange = (e) => {
     const name = e.target.name;

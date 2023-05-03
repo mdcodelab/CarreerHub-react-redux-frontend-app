@@ -1106,3 +1106,32 @@ const handleSubmit = (e) => {
 ----------------------------------------------------------------------
 
 #### 42) Use Existing User Location
+
+AddJob.js
+
+```js
+const { user } = useSelector((store) => store.user);
+
+useEffect(() => {
+  // eventually will check for isEditing
+  if (!isEditing) {
+    dispatch(handleChange({ name: 'jobLocation', value: user.location }));
+  }
+}, []);
+```
+
+jobSlice.js
+
+```js
+
+    // reducers
+    clearValues: () => {
+      return {
+        ...initialState,
+        jobLocation: getUserFromLocalStorage()?.location || '',
+      };
+    },
+```
+------------------------------------------------------------------
+
+#### 43) Logout Message
