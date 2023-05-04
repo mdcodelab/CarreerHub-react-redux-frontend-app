@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Loader from './Loader';
 import { useSelector, useDispatch } from 'react-redux';
-import Job from './Job';
+import Job from "./Job";
 import { getAllJobs } from '../features/allJobs/allJobsSlice';
 
 function JobsContainer() {
@@ -26,7 +26,7 @@ function JobsContainer() {
       <h5>Jobs info</h5>
       <div className="jobs">
         {jobs.map((job) => {
-            return <Job key={job._id}></Job>
+            return <Job key={job._id} {...job}></Job>
         })}
       </div>
 
@@ -34,9 +34,27 @@ function JobsContainer() {
   );
 }
 
-const Wrapper = styled.div `
-
-`;
+const Wrapper = styled.section`
+  margin-top: 4rem;
+  h2 {
+    text-transform: none;
+  }
+  & > h5 {
+    font-weight: 700;
+  }
+  .jobs {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+  @media (min-width: 992px) {
+    .jobs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+`
 
 
 export default JobsContainer;
