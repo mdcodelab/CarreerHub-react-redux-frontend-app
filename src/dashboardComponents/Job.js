@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import moment from "moment";
+import { deleteJob} from '../features/allJobs/allJobsSlice';
 
 
 function Job({_id, position, company, jobLocation, jobType, createdAt, status}) {
@@ -38,7 +39,7 @@ const date=moment(createdAt).format("MMM Do YY");
           <footer>
             <div className="actions">
                 <Link to ="/add-job" className="btn edit-btn" onClick={()=> console.log("edit")}>Edit</Link>
-                <button type="button" className="btn delete-btn" onClick={()=> console.log("delete")}>Delete</button>
+                <button type="button" className="btn delete-btn" onClick={()=> dispatch(deleteJob(_id))}>Delete</button>
             </div>
           </footer>
       </div>
@@ -89,7 +90,7 @@ background: var(--white);
       text-transform: capitalize;
       color: var(--grey-400);
       letter-spacing: var(--letterSpacing);
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
   }
   .pending {

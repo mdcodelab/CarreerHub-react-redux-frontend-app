@@ -1441,4 +1441,43 @@ Job.js
 const date = moment(createdAt).format('MMM Do, YYYY');
 ```
 ---------------------------------------------------------------
-#### 51)
+#### 51) Delete job
+
+allJobsSlice.js:
+
+export const deleteJob = createAsyncThunk("allJobs/deleteJob", async(id, thunkAPI) => {
+    try {
+        const response = await customFetch.delete(`/jobs/${id}`, {
+            headers: {
+                authorization: `Bearer ${thunkAPI.getState().user.user.token}`
+            }
+        })
+        thunkAPI.dispatch(getAllJobs());
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue("There was an error deleting the job");
+    }
+  })
+
+  extraReducers:
+  .addCase(deleteJob.pending, (state) => {
+            state.isLoading =true;
+        })
+        .addCase(deleteJob.fulfilled, (state, {payload}) => {
+           state.isLoading=false;
+           state.jobs=state.jobs.filter((job) => ( job._id != payload._id))
+           toast.success("Job Deleted!");
+        })
+        .addCase(deleteJob.rejected, (state, {payload}) => {
+            state.isLoading=false;
+            toast.error(payload);
+         })
+  
+  ```
+  Jobs.js
+  import { deleteJob} from '../features/allJobs/allJobsSlice';
+   <button type="button" className="btn delete-btn" onClick={()=> dispatch(deleteJob(_id))}>Delete</button>
+   ------------------------------------------------------------
+
+#### 52) 
+

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import customFetch from "../../utils/axios";
 
+
 const initialFiltersState = {
     search: '',
     searchStatus: 'all',
@@ -28,10 +29,24 @@ const initialFiltersState = {
                 authorization: `Bearer ${thunkAPI.getState().user.user.token}`
             }
         })
-        console.log(response.data);
+        //console.log(response.data);
         return response.data;
     } catch (error) {
         return thunkAPI.rejectWithValue("There was an error");
+    }
+  })
+
+  export const deleteJob = createAsyncThunk("allJobs/deleteJob", async(id, thunkAPI) => {
+    try {
+        const response = await customFetch.delete(`/jobs/${id}`, {
+            headers: {
+                authorization: `Bearer ${thunkAPI.getState().user.user.token}`
+            }
+        })
+        thunkAPI.dispatch(getAllJobs());
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue("There was an error deleting the job");
     }
   })
 
@@ -41,6 +56,7 @@ const allJobsSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder
+        //get all jobs
         .addCase(getAllJobs.pending, (state) => {
             state.isLoading =true;
         })
@@ -52,8 +68,26 @@ const allJobsSlice = createSlice({
             state.isLoading=false;
             toast.error(payload);
          })
+         //delete a job
+         .addCase(deleteJob.pending, (state) => {
+            state.isLoading =true;
+        })
+        .addCase(deleteJob.fulfilled, (state, {payload}) => {
+           state.isLoading=false;
+           state.jobs=state.jobs.filter((job) => ( job._id != payload._id))
+           toast.success("Job Deleted!");
+        })
+        .addCase(deleteJob.rejected, (state, {payload}) => {
+            state.isLoading=false;
+            toast.error(payload);
+         })
     }
 });
 
 export default allJobsSlice.reducer;
+
+
+
+
+
 
