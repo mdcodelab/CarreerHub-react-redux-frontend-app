@@ -23,7 +23,7 @@ function JobsContainer() {
 
   return (
     <Wrapper>
-      <h5>Jobs info</h5>
+      <h5>{jobs.length} Jobs Found</h5>
       <div className="jobs">
         {jobs.map((job) => {
             return <Job key={job._id} {...job}></Job>

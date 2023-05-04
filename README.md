@@ -1410,4 +1410,21 @@ const Job = ({
 
 ```
 ---------------------------------------------------------------
-#### 49) 
+#### 49) Job info
+Job.js
+```
+<div className="more-info">
+                <span className="icon"><FaLocationArrow></FaLocationArrow></span>
+                <span className="text">{jobLocation}</span>
+            </div>
+            <div className="more-info">
+                <span className="icon"><FaCalendarAlt></FaCalendarAlt></span>
+                <span className="text">{createdAt}</span>
+            </div>
+            <div className="more-info">
+                <span className="icon"><FaBriefcase></FaBriefcase></span>
+                <span className="text">{jobType}</span>
+            </div>
+```
+------------------------------------------------------------------------
+#### 50)

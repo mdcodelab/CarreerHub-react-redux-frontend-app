@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 function Job({_id, position, company, jobLocation, jobType, createdAt, status}) {
 const dispatch = useDispatch();
-
+const date=createdAt;
 
   return (
     <Wrapper>
@@ -20,7 +20,18 @@ const dispatch = useDispatch();
       </header>
       <div className="center">
           <div className="content-center">
-            <h4>Mode content</h4>
+            <div className="more-info">
+                <span className="icon"><FaLocationArrow></FaLocationArrow></span>
+                <span className="text">{jobLocation}</span>
+            </div>
+            <div className="more-info">
+                <span className="icon"><FaCalendarAlt></FaCalendarAlt></span>
+                <span className="text">{createdAt}</span>
+            </div>
+            <div className="more-info">
+                <span className="icon"><FaBriefcase></FaBriefcase></span>
+                <span className="text">{jobType}</span>
+            </div>
             <div className={`status ${status}`}>{status}</div>
           </div>
           <footer>
@@ -70,13 +81,14 @@ background: var(--white);
   .info {
     h5 {
       margin-bottom: 0.25rem;
+      font-size: 2rem;
     }
     p {
       margin: 0;
       text-transform: capitalize;
       color: var(--grey-400);
       letter-spacing: var(--letterSpacing);
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
   .pending {
@@ -117,7 +129,7 @@ background: var(--white);
     width: 100px;
     height: 30px;
     margin-top: 0.5rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,6 +157,22 @@ background: var(--white);
   }
   &:hover .actions {
     visibility: visible;
+  }
+  .more-info {
+    margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  }
+  .icon {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  .text {
+    text-transform: capitalize;
+    letter-spacing: var(--letterSpacing);
+    font-size: 1.2rem;
   }
 `;
 
