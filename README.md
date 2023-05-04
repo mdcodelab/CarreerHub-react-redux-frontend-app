@@ -1427,4 +1427,18 @@ Job.js
             </div>
 ```
 ------------------------------------------------------------------------
-#### 50)
+#### 50) Moment.js
+
+[moment.js](https://momentjs.com/)
+
+```sh
+npm install moment
+```
+
+Job.js
+
+```js
+const date = moment(createdAt).format('MMM Do, YYYY');
+```
+---------------------------------------------------------------
+#### 51)

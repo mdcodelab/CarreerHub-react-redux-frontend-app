@@ -3,11 +3,12 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import moment from "moment";
 
 
 function Job({_id, position, company, jobLocation, jobType, createdAt, status}) {
 const dispatch = useDispatch();
-const date=createdAt;
+const date=moment(createdAt).format("MMM Do YY");
 
   return (
     <Wrapper>
@@ -26,7 +27,7 @@ const date=createdAt;
             </div>
             <div className="more-info">
                 <span className="icon"><FaCalendarAlt></FaCalendarAlt></span>
-                <span className="text">{createdAt}</span>
+                <span className="text">{date}</span>
             </div>
             <div className="more-info">
                 <span className="icon"><FaBriefcase></FaBriefcase></span>
@@ -112,6 +113,7 @@ background: var(--white);
     row-gap: 0.5rem;
     @media (min-width: 576px) {
       grid-template-columns: 1fr 1fr;
+      padding-top: 1rem;
     }
     @media (min-width: 992px) {
       grid-template-columns: 1fr;
