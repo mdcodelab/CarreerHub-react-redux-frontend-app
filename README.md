@@ -1479,5 +1479,29 @@ export const deleteJob = createAsyncThunk("allJobs/deleteJob", async(id, thunkAP
    <button type="button" className="btn delete-btn" onClick={()=> dispatch(deleteJob(_id))}>Delete</button>
    ------------------------------------------------------------
 
-#### 52) 
+#### 52) Edit job functionality
+2 steps process:
+i) click "Edit" to navigate to AddJob page and set up those estate values (which have been cleaned).
+We rewrite them.
+ii) edit job request
+-------------------
+i) jobSlice.js
+reducers:
+ setEditJob: (state, {payload}) => {
+          return {...state, isEditing: true, ...payload}
+        }
+        export const {handleChange, handleClear, setEditJob}=jobSlice.actions;
+    
+    Job.js
+    import { setEditJob } from '../features/job/jobSlice';
+    onClick={()=> dispatch(setEditJob({editJobId: _id, position, company, jobLocation, status, jobType}))}
+----
+ii) 
+
+
+------------------------------------------------------------------------------
+
+
+
+
 

@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import customFetch from "../../utils/axios";
 import { getUserFromLocalStorage } from '../../utils/localStorage';
-import { useDispatch } from 'react-redux';
 import { logoutUser } from '../user/userSlice';
 
 
@@ -52,6 +51,9 @@ const jobSlice = createSlice({
         handleClear: (state) => {
             return {...initialState, jobLocation: getUserFromLocalStorage()?.location || "" }
         },
+        setEditJob: (state, {payload}) => {
+          return {...state, isEditing: true, ...payload}
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -72,6 +74,6 @@ const jobSlice = createSlice({
 
 
 
-export const {handleChange, handleClear}=jobSlice.actions;
+export const {handleChange, handleClear, setEditJob}=jobSlice.actions;
 
 export default jobSlice.reducer;

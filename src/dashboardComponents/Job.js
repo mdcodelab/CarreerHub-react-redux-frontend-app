@@ -5,11 +5,13 @@ import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import moment from "moment";
 import { deleteJob} from '../features/allJobs/allJobsSlice';
+import { setEditJob } from '../features/job/jobSlice';
 
 
 function Job({_id, position, company, jobLocation, jobType, createdAt, status}) {
 const dispatch = useDispatch();
 const date=moment(createdAt).format("MMM Do YY");
+
 
   return (
     <Wrapper>
@@ -38,7 +40,8 @@ const date=moment(createdAt).format("MMM Do YY");
           </div>
           <footer>
             <div className="actions">
-                <Link to ="/add-job" className="btn edit-btn" onClick={()=> console.log("edit")}>Edit</Link>
+                <Link to ="/add-job" className="btn edit-btn" 
+                onClick={()=> dispatch(setEditJob({editJobId: _id, position, company, jobLocation, status, jobType}))}>Edit</Link>
                 <button type="button" className="btn delete-btn" onClick={()=> dispatch(deleteJob(_id))}>Delete</button>
             </div>
           </footer>

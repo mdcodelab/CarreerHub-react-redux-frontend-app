@@ -16,6 +16,8 @@ function AddJob() {
     //eventually will check for isEditing
     if(!isEditing) {
       dispatch(handleChange({name: "jobLocation", value: user.location}))
+    } else {
+      dispatch(handleChange({name: "jobLocation", value: jobLocation}))
     }
 
   }, []);
