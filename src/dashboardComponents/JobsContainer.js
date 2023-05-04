@@ -3,10 +3,14 @@ import styled from "styled-components";
 import Loader from './Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import Job from './Job';
+import { getAllJobs } from '../features/allJobs/allJobsSlice';
 
 function JobsContainer() {
     const {isLoading, jobs}=useSelector((store)=> store.allJobs);
     const dispatch=useDispatch();
+    React.useEffect(()=> {
+        dispatch(getAllJobs());
+    }, [])
 
     if(isLoading){
         return <Loader></Loader>
