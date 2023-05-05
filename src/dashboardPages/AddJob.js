@@ -3,95 +3,90 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux';
 import FormRow from "../components/FormRow";
-//import FormRowSelect from '../components/FormRowSelect';
-import { createJob, handleChange, handleClear } from '../features/job/jobSlice';
+import { createJob, handleChange, handleClear, editJob } from '../features/job/jobSlice';
 
 function AddJob() {
   const {isLoading, position, company, jobLocation, jobType, jobTypeOptions, status,
-  statusOptions, isEditing, editJobId}=useSelector((state)=> state.job);
-  const dispatch=useDispatch();
+    statusOptions, isEditing, editJobId} = useSelector(state => state.job);
+  const dispatch = useDispatch();
+  const { user } = useSelector(store => store.user);
 
-  const {user}=useSelector((store) => store.user);
-  React.useEffect(()=> {
-    //eventually will check for isEditing
-    if(!isEditing) {
-      dispatch(handleChange({name: "jobLocation", value: user.location}))
-    } else {
-      dispatch(handleChange({name: "jobLocation", value: jobLocation}))
+  React.useEffect(() => {
+    if (!isEditing) {
+      dispatch(handleChange({ name: "jobLocation", value: user.location }));
     }
-
-  }, []);
+  }, [dispatch, isEditing, jobLocation, user.location]);
 
   const onChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     console.log(name, value);
-    dispatch(handleChange({name, value}));
+    dispatch(handleChange({ name, value }));
   }
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if(!position || !company || !jobLocation) {
+    if (!position || !company || !jobLocation) {
       toast.warning("Please Fill Out All Fields!");
       return;
     }
-    dispatch(createJob({position, company, jobLocation, jobType, status}));
+    if (isEditing) {
+      dispatch(editJob({
+        jobId: editJobId,
+        job: { position, company, jobLocation, jobType, status }
+      }));
+    } else {
+      dispatch(createJob({ position, company, jobLocation, jobType, status }));
+    }
   }
 
   return (
     <Wrapper>
-    <form className='form'>
-      <h3>{isEditing ? 'Edit Job' : 'Add Job'}</h3>
-      <div className='form-center'>
-        {/* position */}
-        <FormRow type='text' name='position' value={position} onChange={onChange}/>
-        {/* company */}
-        <FormRow type='text' name='company' value={company} onChange={onChange}/>
-        {/* jobLocation */}
-        <FormRow type='text' name='jobLocation' labelText='Job Location' value={jobLocation} 
-        onChange={onChange}/>
-        {/* job type */}       
-        <div className="form-row">
-        <label htmlFor="jobType" className="form-label">Job Type</label>
-        <select name="jobType" value={jobType} onChange={onChange}>
-            {jobTypeOptions.map((option, index)=> {
-              return <option key={index} value={option}>{option}</option>
-            })}
-        </select>
+      <form className='form' onSubmit={onSubmit}>
+        <h3>{isEditing ? 'Edit Job' : 'Add Job'}</h3>
+        <div className='form-center'>
+          <FormRow type='text' name='position' value={position} onChange={onChange} />
+          <FormRow type='text' name='company' value={company} onChange={onChange} />
+          <FormRow type='text' name='jobLocation' labelText='Job Location' value={jobLocation}
+            onChange={onChange} />
+          <div className="form-row">
+            <label htmlFor="jobType" className="form-label">Job Type</label>
+            <select name="jobType" value={jobType} onChange={onChange}>
+              {jobTypeOptions.map((option, index) => {
+                return <option key={index} value={option}>{option}</option>
+              })}
+            </select>
+          </div>
+          <div className="form-row">
+            <label htmlFor="status" className="form-label">Status</label>
+            <select name="status" value={status} onChange={onChange}>
+              {statusOptions.map((option, index) => {
+                return <option key={index} value={option}>{option}</option>
+              })}
+            </select>
+          </div>
+          <div className='btn-container'>
+            <button
+              type='button'
+              className='btn btn-block clear-btn'
+              onClick={() => dispatch(handleClear())}>
+              Clear
+            </button>
+            <button
+              type='submit'
+              className='btn btn-block submit-btn'
+              disabled={isLoading}>
+              {isLoading ? 'Submitting...' : 'Submit'}
+            </button>
+          </div>
         </div>
-        {/* status */}
-        <div className="form-row">
-        <label htmlFor="status" className="form-label">Status</label>
-          <select name="status" value={status} onChange={onChange}>
-            {statusOptions.map((option, index)=> {
-              return <option key={index} value={option}>{option}</option>
-            })}
-          </select>
-        </div>
-        
-        {/* job type*/}
-        
-        
-        <div className='btn-container'>
-          <button
-            type='button'
-            className='btn btn-block clear-btn'
-            onClick={() => dispatch(handleClear())}>
-            Clear
-          </button>
-          <button
-            type='submit'
-            className='btn btn-block submit-btn'
-            onClick={onSubmit}
-            disabled={isLoading}>
-            Submit
-          </button>
-        </div>
-      </div>
-    </form>
-  </Wrapper>
+      </form>
+    </Wrapper>
   );
 }
+
+
+
 
 const Wrapper = styled.section`
   border-radius: var(--borderRadius);

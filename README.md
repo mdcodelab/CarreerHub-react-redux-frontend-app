@@ -1496,11 +1496,49 @@ reducers:
     import { setEditJob } from '../features/job/jobSlice';
     onClick={()=> dispatch(setEditJob({editJobId: _id, position, company, jobLocation, status, jobType}))}
 ----
-ii) 
+ii) jobSlice.js
+export const editJob = createAsyncThunk("allJobs/editJob", async({jobId, job}, thunkAPI) => {
+    try {
+        const response = await customFetch.patch(`/jobs/${jobId}`, job, {
+                headers: {
+                    authorization: `Bearer ${thunkAPI.getState().user.user.token}`  
+                }
+        })
+            return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue("There was an error editing the job!");
+    }
+  })
 
-
+extraReducers:
+//edit job
+          .addCase(editJob.pending, (state, action) => {
+            state.isLoading = true;
+          })
+          .addCase(editJob.fulfilled, (state, {payload}) => {
+            state.isLoading = false;
+            toast.success("Job Modified!");
+          })
+          .addCase(editJob.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            toast.error(payload);
+          })
+  
+  AddJob.js
+  const onSubmit = (e) => {
+    .....................
+    if (isEditing) {
+      dispatch(editJob({
+        jobId: editJobId,
+        job: { position, company, jobLocation, jobType, status }
+      }));
+    } else {
+      dispatch(createJob({ position, company, jobLocation, jobType, status }));
+    }
+  }
+```````````````
 ------------------------------------------------------------------------------
-
+#### 53)
 
 
 

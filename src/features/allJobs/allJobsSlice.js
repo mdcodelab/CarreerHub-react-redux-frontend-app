@@ -46,9 +46,10 @@ const initialFiltersState = {
         thunkAPI.dispatch(getAllJobs());
         return response.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue("There was an error deleting the job");
+        return thunkAPI.rejectWithValue("There was an error deleting the job!");
     }
   })
+
 
 
 const allJobsSlice = createSlice({
