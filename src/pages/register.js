@@ -85,11 +85,16 @@ function Register() {
         <FormRow type="password" name="password" value={values.password} onChange={onChange}/>
 
         <button type='submit' className='btn btn-block' disabled={isLoading}>{isLoading ? "Loading..." : "Submit"}</button>
+        <button type="button" className="btn btn-block btn-hipster" disabled={isLoading}
+            onClick={()=> dispatch(loginUser({email: "testUser@test.com", password: "secret"}))}>
+              {isLoading ? "Loading.." : "Demo App"}
+            </button>
         <div className="toggle">
             {values.isMember ? <span>Not a member yet?</span> : <span>Already a member?</span> }
             <button type="button" className="member-btn" onClick={()=>toggleMember()}>
                 {values.isMember ? "Register" : "Login"}
             </button>
+           
         </div>
       </form>
 
@@ -126,7 +131,7 @@ const Wrapper = styled.section`
     margin-left: 0.3rem;
   }
   div.toggle {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;

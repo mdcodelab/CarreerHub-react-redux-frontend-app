@@ -1538,7 +1538,16 @@ extraReducers:
   }
 ```````````````
 ------------------------------------------------------------------------------
-#### 53)
+#### 53) Test user
+Register.js
+ <button type="button" className="btn btn-block btn-hipster" disabled={isLoading}
+            onClick={()=> dispatch(loginUser({email: "testUser@test.com", password: "secret"}))}>
+              {isLoading ? "Loading.." : "Demo App"}
+            </button>
+
+-------------------------------------------------------------------------------
+### 54)
+
 
 
 
